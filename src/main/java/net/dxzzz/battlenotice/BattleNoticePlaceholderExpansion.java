@@ -1,0 +1,67 @@
+package net.dxzzz.battlenotice;
+
+import me.clip.placeholderapi.expansion.PlaceholderExpansion;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.List;
+
+public class BattleNoticePlaceholderExpansion extends PlaceholderExpansion {
+    private static BattleNoticePlaceholderExpansion instance;
+    private static String identifier;
+    private static JavaPlugin plugin = JavaPlugin.getProvidingPlugin(BattleNoticePlaceholderExpansion.class);
+
+    public static BattleNoticePlaceholderExpansion getInstance() {
+        if (instance == null) {
+            instance = new BattleNoticePlaceholderExpansion("battlenotice");
+        }
+        return instance;
+    }
+
+    public BattleNoticePlaceholderExpansion(String identifier) {
+        this.identifier = identifier;
+    }
+
+    @Override
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    @Override
+    public String getAuthor() {
+        return "wyuu";
+    }
+
+    @Override
+    public String getVersion() {
+        return "1.0";
+    }
+
+    @Override
+    public String onPlaceholderRequest(Player player, String identifier) {
+        if (identifier.startsWith("message")) {
+
+            PermissionManager permissionManager = new PermissionManager(player, plugin);
+            List<String> msgNoticePermission = permissionManager.getUsingPermissions("battlenotice.message");
+            if (msgNoticePermission.isEmpty()) {
+                return "§c关闭";
+            } else {
+                return "§a开启";
+            }
+        }
+        else if (identifier.startsWith("title")) {
+            PermissionManager permissionManager = new PermissionManager(player, plugin);
+            List<String> msgNoticePermission = permissionManager.getUsingPermissions("battlenotice.title");
+            if (msgNoticePermission.isEmpty()) {
+                return "§c关闭";
+            } else {
+                return "§a开启";
+            }
+        }
+        else {
+            return null;
+        }
+
+    }
+}
+

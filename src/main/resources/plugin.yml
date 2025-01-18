@@ -1,0 +1,4 @@
+name: BattleNotice
+version: '${project.version}'
+main: net.dxzzz.battlenotice.BattleNotice
+depend: [PlaceholderAPI,TitleAPI, LuckPerms]

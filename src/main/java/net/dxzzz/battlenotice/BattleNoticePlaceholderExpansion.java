@@ -40,28 +40,56 @@ public class BattleNoticePlaceholderExpansion extends PlaceholderExpansion {
     @Override
     public String onPlaceholderRequest(Player player, String identifier) {
         if (identifier.startsWith("message")) {
-
-            PermissionManager permissionManager = new PermissionManager(player, plugin);
-            List<String> msgNoticePermission = permissionManager.getUsingPermissions("battlenotice.message");
-            if (msgNoticePermission.isEmpty()) {
-                return "§c关闭";
-            } else {
-                return "§a开启";
+            String[] parts = identifier.split("_");
+            if (parts.length < 2) {
+                return null;
             }
-        }
-        else if (identifier.startsWith("title")) {
+            String tag = parts[1];
             PermissionManager permissionManager = new PermissionManager(player, plugin);
-            List<String> msgNoticePermission = permissionManager.getUsingPermissions("battlenotice.title");
-            if (msgNoticePermission.isEmpty()) {
-                return "§c关闭";
+            if (tag.equals("combat")) {
+                List<String> msgNoticePermission = permissionManager.getUsingPermissions("battlenotice.message.combat");
+                if (msgNoticePermission.isEmpty()) {
+                    return "§c关闭";
+                } else {
+                    return "§a开启";
+                }
+            } else if (tag.equals("bow")) {
+                List<String> msgNoticePermission = permissionManager.getUsingPermissions("battlenotice.message.bow");
+                if (msgNoticePermission.isEmpty()) {
+                    return "§c关闭";
+                } else {
+                    return "§a开启";
+                }
             } else {
-                return "§a开启";
+                return null;
             }
-        }
-        else {
-            return null;
-        }
+        } else if (identifier.startsWith("title")) {
+            String[] parts = identifier.split("_");
+            if (parts.length < 2) {
+                return null;
+            }
+            String tag = parts[1];
+            PermissionManager permissionManager = new PermissionManager(player, plugin);
+            if (tag.equals("combat")) {
+                List<String> msgNoticePermission = permissionManager.getUsingPermissions("battlenotice.title.combat");
+                if (msgNoticePermission.isEmpty()) {
+                    return "§c关闭";
+                } else {
+                    return "§a开启";
+                }
+            } else if (tag.equals("bow")) {
+                List<String> msgNoticePermission = permissionManager.getUsingPermissions("battlenotice.title.bow");
+                if (msgNoticePermission.isEmpty()) {
+                    return "§c关闭";
+                } else {
+                    return "§a开启";
+                }
+            } else {
+                return null;
+            }
 
+        }
+        return null;
     }
 }
 

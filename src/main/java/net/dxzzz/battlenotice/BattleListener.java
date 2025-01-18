@@ -43,8 +43,8 @@ public class BattleListener implements Listener {
                 Player victim = (Player) event.getEntity();
                 double damageValue = event.getFinalDamage();
                 PermissionManager permissionManager = new PermissionManager(damager,plugin);
-                List<String> noticeMsgPermission = permissionManager.getUsingPermissions("battlenotice.message");
-                List<String> noticeTitlePermission = permissionManager.getUsingPermissions("battlenotice.title");
+                List<String> noticeMsgPermission = permissionManager.getUsingPermissions("battlenotice.message.combat");
+                List<String> noticeTitlePermission = permissionManager.getUsingPermissions("battlenotice.title.combat");
                 //().info(String.valueOf( noticeMsgPermission.size()));
                 //().info(String.valueOf( noticeTitlePermission.size()));
                 //().info("监听到玩家受到伤害");
@@ -89,8 +89,8 @@ public class BattleListener implements Listener {
                     Player victim = (Player) event.getEntity();
                     double damageValue = event.getFinalDamage();
                     PermissionManager permissionManager = new PermissionManager(damager, plugin);
-                    List<String> noticeMsgPermission = permissionManager.getUsingPermissions("battlenotice.message");
-                    List<String> noticeTitlePermission = permissionManager.getUsingPermissions("battlenotice.title");
+                    List<String> noticeMsgPermission = permissionManager.getUsingPermissions("battlenotice.message.bow");
+                    List<String> noticeTitlePermission = permissionManager.getUsingPermissions("battlenotice.title.bow");
                     if (!noticeMsgPermission.isEmpty()) {
                         if (victim.getHealth() - damageValue < 0.01) {
                             TextComponent msgToDeath = new TextComponent(String.format(formatToDeath, victim.getName(), df.format(damageValue)));
